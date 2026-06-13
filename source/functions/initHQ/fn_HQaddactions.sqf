@@ -13,3 +13,4 @@ if (!isServer) then {
 };
 
 _hq addaction ["<t color='#00FFFF'>RESET SQUAD LEADER</t>",{[] call duws_fnc_groupReset}, "", 0, true, true, "", "_this == player"];
+_hq addaction ["<t color='#ffb700'>Rearm squad (2CP)</t>",duws_fnc_rearmSquad, "", 0, true, true, "", "_this == player"];

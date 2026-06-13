@@ -225,3 +225,12 @@ if (zones_manually_placed) then {
     sleep 1;
     _warcom_init = [Array_of_OPFOR_zones, getpos hq_blu1, [0,0,0], blufor_ap, opfor_ap, 2700,blufor_ai_skill,opfor_ai_skill, 1500] call duws_fnc_WARCOM_init;
 };
+
+// LAMBS Danger AI compatibility
+if (isClass (configFile >> "CfgPatches" >> "lambs_main")) then {
+    diag_log "DUWS-R: LAMBS Danger AI detected - enabling enhanced AI behavior";
+    // Enable LAMBS for all groups (default is on, this ensures it)
+    {
+        _x setVariable ["lambs_danger_disabled", false];
+    } forEach allGroups;
+};

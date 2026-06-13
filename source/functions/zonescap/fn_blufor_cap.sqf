@@ -42,7 +42,34 @@ publicVariable "commandpointsblu1";
 
 ["CPadded_retaken",[(_points/2)]] call bis_fnc_showNotification;
 
+// === ZONE CAPTURE FEEDBACK ===
+// Show remaining zone count
+private _remainingZones = count WARCOM_zones_controled_by_OPFOR;
+private _totalZones = _remainingZones + zoneundercontrolblu;
+systemChat format ["[DUWS-R] Zone captured! %1 zones remaining (%2/%3 secured)", _remainingZones, zoneundercontrolblu, _totalZones];
 
+// Reveal enemies in captured zone for 10 seconds
+private _revealRadius = 200;
+{
+    if (side _x == EAST && {_x distance _triggerPos < _revealRadius}) then {
+        _x setMarkerAlpha 0.8;
+    };
+} forEach allUnits;
+sleep 10;
+{
+    if (side _x == EAST && {_x distance _triggerPos < _revealRadius}) then {
+        _x setMarkerAlpha 1;
+    };
+} forEach allUnits;
+
+// Show remaining zones on map with temporary markers
+private _zoneMarker = createMarker [format ["zone_remaining_%1", round time], _triggerPos];
+_zoneMarker setMarkerShape "ICON";
+_zoneMarker setMarkerType "mil_dot";
+_zoneMarker setMarkerColor "ColorGreen";
+_zoneMarker setMarkerText format ["%1 zones left", _remainingZones];
+sleep 15;
+deleteMarker _zoneMarker;
 
 // RECALL VARNAME FOR ZONE TRIGGER --> use the pos of the trigger
 private "_trg";
@@ -50,5 +77,3 @@ call compile format["_trg = trigger%1%2",round (_triggerPos select 0),round (_tr
 //// MAKE THE TRIGGER CAPTURABLE FOR OPFOR
 _trg setTriggerActivation["EAST SEIZED","PRESENT",true];
 _trg setTriggerStatements["this", format["[""%1"",%2,""%3"",""%4"",%5] call duws_fnc_opfor_cap",_place,_points,_markername,_markername2,_triggerPos], ""];
-
-

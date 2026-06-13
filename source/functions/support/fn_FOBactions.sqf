@@ -13,6 +13,7 @@ if (support_armory_available) then {
 
 _fob addaction ["<t color='#ffb700'>Squad manager</t>",duws_fnc_squadmng, "", 0, true, true, "", "_this == player"];
 _fob addaction ["<t color='#ffb700'>FOB manager</t>",duws_fnc_fobmanageropen, "", 0, true, true, "", "_this == player"];
+_fob addaction ["<t color='#ffb700'>Rearm squad (2CP)</t>",duws_fnc_rearmSquad, "", 0, true, true, "", "_this == player"];
 
 if (isServer) then {
     _fob addaction ["<t color='#00b7ff'>Rest (wait/save)</t>",duws_fnc_savegame, "", 0, true, true, "", "_this == player"];

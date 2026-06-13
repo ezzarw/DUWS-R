@@ -181,6 +181,10 @@ Indfor_Faction = "IND_F";
 // Civilian faction
 Civilian_Faction = "CIV_F";
 
+// Enemy Multiplier - increase/decrease enemy counts (default 1.0)
+DUWS_enemyMultiplier = 1.0;
+publicVariable "DUWS_enemyMultiplier";
+
 ///////Special Operatives///////
 duws_operator_list=[
     [0.35,0.62,0.67,0.48,0.66,0.32,"Scout","Ready","Matthew 'Ghost' Norton","ghost","B_recon_F","H_Shemag_olive_hs",0,0],

@@ -42,6 +42,14 @@ _hq disableAI "MOVE";
 removeallweapons _hq;
 [_hq] spawn duws_fnc_commanderAnim;
 _hq setdir 270;
+// Make commander sit still at desk
+[_hq] spawn {
+    params ["_unit"];
+    sleep 2;
+    _unit playMoveNow "HubSittingChairB_idle1";
+    _unit disableAI "ANIM";
+    _unit setVariable ["BIS_fnc_animalBehaviour_disable", true];
+};
 _handle = [_hq] spawn duws_fnc_radiochatter;
 //_drawicon = [] execVM "inithq\drawIcon.sqf"; // create the icon
 
@@ -102,3 +110,6 @@ if (debugmode) exitWith {};
 if (isServer) then {
     _sitrep = [player,"sitrep"] call BIS_fnc_addCommMenuItem;
 };
+
+// Start AI Unstuck system (runs every 30s, frees stuck AI)
+[] execVM "functions\utilities\fn_aiUnstuck.sqf";
