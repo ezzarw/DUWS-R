@@ -9,6 +9,8 @@ LoadScreen = "rtipic.paa";
 respawn = 3;
 respawnDelay = 4;
 disabledAI = 1;
+respawnOnStart = -1;
+enableDebugConsole = 1;
 
 #include "includes\debriefing.hpp"
 #include "includes\defines.hpp"
