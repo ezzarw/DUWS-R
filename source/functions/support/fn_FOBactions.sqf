@@ -1,5 +1,9 @@
 params ["_fob"];
 
+// Prevent duplicate actions on JIP/re-init
+if (_fob getVariable ["duws_fob_actions_init", false]) exitWith {};
+_fob setVariable ["duws_fob_actions_init", true];
+
 _fob addaction ["<t color='#ff00ff'>Player stats</t>",duws_fnc_info, "", 0, true, true, "", "_this == player"];
 _fob addaction ["<t color='#15ff00'>Request ammobox drop(2CP)</t>",duws_fnc_fob_ammobox, "", 0, true, true, "", "_this == player"];
 

@@ -16,8 +16,10 @@ hq_blu1 spawn {
 
 waitUntil {!isNil "amount_zones_created" && {amount_zones_created > 0}};
 
-// WAIT UNTIL ALL ZONES ARE CAPTURED
-waitUntil {sleep 3; (zoneundercontrolblu >= amount_zones_created);}; // Toutes les zones sont capturées
+// Wait until ALL enemy zones are captured (OPFOR has no more zones)
+// Uses WARCOM_zones_controled_by_OPFOR instead of zoneundercontrolblu
+// to handle cases where OPFOR recaptures zones mid-game
+waitUntil {sleep 3; (!isNil "WARCOM_zones_controled_by_OPFOR" && {count WARCOM_zones_controled_by_OPFOR == 0})}; 
 {
     persistent_stat_script_win = [] call duws_fnc_persistent_stats_win;
     ["TaskSucceeded",["","Island captured!"]] call bis_fnc_showNotification;

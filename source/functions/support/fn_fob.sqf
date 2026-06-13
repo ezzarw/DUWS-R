@@ -35,11 +35,16 @@ _amountOPFOR = count list _trg;
 
 deleteVehicle _trg;
 
-if (_amountOPFOR > 0) exitWith {
-    Hint "This position is not clear from enemies";
+// Allow FOB placement if fewer than 4 enemies remain (handles stragglers after zone capture)
+if (_amountOPFOR > 3) exitWith {
+    Hint format ["This position is not clear from enemies (%1 enemies nearby)", _amountOPFOR];
     [west, "PAPA_BEAR"] sidechat format["Request denied. Enemies are too close to this position. We approximate %1 enemy unit(s) nearby!", _amountOPFOR];
     sleep 15;
     _art = [player,"fob_support"] call BIS_fnc_addCommMenuItem;
+};
+
+if (_amountOPFOR > 0 && _amountOPFOR <= 3) then {
+    Hint format ["Area mostly clear (%1 stragglers remaining). Deploying FOB...", _amountOPFOR];
 };
 
 // Attempt to find a safe position

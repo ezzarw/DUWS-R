@@ -30,5 +30,4 @@ _wp setWaypointSpeed "LIMITED";
 // ADD Infinite Ammo eventhandler
 {
     _x addEventHandler ["Fired",{(_this select 0) setvehicleammo 1}];
-    _x addEventHandler ["HandleDamage", {false}];
 } forEach (units _groupPatrol);

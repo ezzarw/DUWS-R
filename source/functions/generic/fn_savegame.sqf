@@ -7,7 +7,18 @@ if (isServer) then {
     sleep 0.3;
     saveGame;
 
-    hint "You and your squad members have been fully healed";
+    // Save mission state to profileNamespace for persistence across reloads
+    profileNamespace setVariable ["duws_save_cp", commandpointsblu1];
+    profileNamespace setVariable ["duws_save_blufor_ap", WARCOM_blufor_ap];
+    profileNamespace setVariable ["duws_save_opfor_ap", WARCOM_opfor_ap];
+    profileNamespace setVariable ["duws_save_zones_under_control", zoneundercontrolblu];
+    profileNamespace setVariable ["duws_save_zones_captured", amount_zones_captured];
+    profileNamespace setVariable ["duws_save_missions_success", missions_success];
+    profileNamespace setVariable ["duws_save_number", savegameNumber + 1];
+    profileNamespace setVariable ["duws_save_time", date];
+    saveProfileNamespace;
+
+    hint "Game saved! Your progress has been persisted.";
     savegameNumber = savegameNumber + 1;
     publicVariable "savegameNumber";
 
